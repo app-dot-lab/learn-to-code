@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* colors */
+
+/* 
+    Primary green : #57CE6A 
+    Dark #1 : #121722
+    Dark #2 : #171C28
+*/
+
+.text-green {
+    color: #57CE6A !important;
+}
+
+.bg-green {
+    background-color: #57CE6A !important;
+}
+
+.bg-dark1 {
+    background-color: #121722 !important;
+}
+
+.bg-dark2 {
+    background-color: #171C28 !important;
+}
+
+/* body */
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: #121722;
+}
+
+.main-container {
+    margin-left: 70px;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Card */
+
+.card-dark {
+    border: none;
+}
+
+.card-dark .card-body {
+    background-color: #171C28;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* sidebar */
+
+.logo * {
+    font-size: 35px;
+}
+
+.sidebar {
+    z-index: 10000;
+    background-color: #171C28;
+    width: 70px;
+    height: 100vh;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+    position: fixed;
+}
+
+.navbar-item {
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.navbar-item .navbar-item-icon {
+    font-size: 35px;
+    color: #54607D;
+}
+
+.navbar-item:hover .navbar-item-icon {
+    color: #57CE6A;
+    transition: color 0.2s ease-in-out
+}
+
+.navbar-item:hover .navbar-item-label {
+    display: inline;
+    transform: scale(1) translateX(30px);
+    transition: transform 0.2s ease-in-out;
+}
+
+.navbar-item-label {
+    position: absolute;
+    transform: scale(0) translateX(0);
+    transition: transform 0.2s ease-in-out;
+    margin-top: 2px;
+    color: #121722;
+    padding: 8px 15px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+    background-color: #57CE6A;
+    border-radius: 5px;
+}
+
+/* posts */
+
+.tag {
+    padding: 7px 12px;
+    /* border: 1px solid #57CE6A; */
+    border-radius: 3px;
+    margin: 0 15px 10px 0;
+    color: #57CE6A;
+}
