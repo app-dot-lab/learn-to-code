@@ -1,13 +1,16 @@
 import React from 'react'
 import * as icons from '@material-ui/icons';
+import {NavLink} from 'react-router-dom'
 
 class Sidebar extends React.Component {
 
+    state = { activeNav: 0 }
+
     navItems = [
-        { icon: icons.Apps, text: 'Home', active: true },
-        { icon: icons.Search, text: 'Search', active: false },
-        { icon: icons.MenuBook, text: 'Courses', active: false },
-        { icon: icons.Code, text: 'IDE', active: false },
+        { icon: icons.Apps, text: 'Home', link: '/'},
+        { icon: icons.Search, text: 'Search', link: '/search'},
+        { icon: icons.MenuBook, text: 'Courses', link: '/posts'},
+        { icon: icons.Code, text: 'IDE', link: '/ide'},
     ]
 
     render() {
@@ -24,10 +27,12 @@ class Sidebar extends React.Component {
                     { 
                         this.navItems.map((item, index) => {
                             return (
-                                <div key={index} className='navbar-item py-4'>
-                                    <item.icon className={`navbar-item-icon ${item.active ? 'text-green': ''}`}></item.icon>
-                                    <span className='navbar-item-label'>{item.text}</span>
-                                </div>
+                                <NavLink to={item.link} exact activeClassName='navbar-active'>
+                                    <div key={index} className='navbar-item py-4'>
+                                        <item.icon className={`navbar-item-icon`}></item.icon>
+                                        <span className='navbar-item-label'>{item.text}</span>
+                                    </div>
+                                </NavLink>
                             )
                         })
                     }

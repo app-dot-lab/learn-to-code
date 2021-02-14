@@ -32,6 +32,34 @@ class Posts extends React.Component {
             tags: ['vue'],
             color: '#4ce58d',
         },
+        { 
+            title: 'Multi-Level Dropdown Menu with React',
+            desc: 'Build an animated multi-level dropdown menu from scratch with React, inspired by Facebook\'s 2020 UI update', 
+            img: 'https://fireship.io/lessons/dropdown-menu-multi-level-react/img/featured.webp',
+            tags: ['react'],
+            color: '#446cf0',
+        },
+        { 
+            title: 'Custom Usernames in firebase',
+            desc: 'How to implement and validate custom usernames for Firebase users with Cloud Firestore',
+            img: 'https://fireship.io/lessons/custom-usernames-firebase/img/featured.webp',
+            tags: ['firebase'],
+            color: '#fab22c',
+        },
+        { 
+            title: 'Autosave Vue Forms with Firestore',
+            desc: 'Build a form that preloads and autosaves data to Firestore in realtime',
+            img: 'https://fireship.io/lessons/vue-autosaving-forms-with-firestore/img/featured.webp',
+            tags: ['vue'],
+            color: '#4ce58d',
+        },
+        { 
+            title: 'Multi-Level Dropdown Menu with React',
+            desc: 'Build an animated multi-level dropdown menu from scratch with React, inspired by Facebook\'s 2020 UI update', 
+            img: 'https://fireship.io/lessons/dropdown-menu-multi-level-react/img/featured.webp',
+            tags: ['react'],
+            color: '#446cf0',
+        },
     ]
 
     render() {

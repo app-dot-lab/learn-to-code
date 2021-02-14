@@ -70,6 +70,10 @@ body {
     position: fixed;
 }
 
+.navbar-active .navbar-item-icon {
+    color: #57CE6A !important;
+}
+
 .navbar-item {
     cursor: pointer;
     border-radius: 5px;

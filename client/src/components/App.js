@@ -2,6 +2,8 @@ import React from 'react'
 import Backend from '../api/backend'
 import Sidebar from './Sidebar'
 import Posts from './Posts'
+import Home from './Home'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -15,11 +17,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Sidebar />
+            <Router>
+                <div>
+                    <Sidebar />
 
-                <Posts />
-            </div>
+                    <Switch>
+                        <Route path='/' exact component={Home} />
+                        <Posts path='/posts' component={Posts} />
+                    </Switch>
+                </div>
+            </Router>
         )
     }
 }
