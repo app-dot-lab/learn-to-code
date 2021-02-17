@@ -65,13 +65,13 @@ class Posts extends React.Component {
     render() {
         return (
             <div className='main-container'>
-                <h1>Posts</h1>
+                <h1>Courses</h1>
                 <br></br>
-                <Row className='posts'>
+                <Row className='courses'>
                     {
                         this.posts.map((post, index) => {
                             return (
-                                <Col key={index} xl={3} lg={4} sm={12} md={6}>
+                                <Col key={index} sm={12} md={6} lg={4} xl={3}>
                                     <Card className='card-dark cursor-pointer mb-5'>
                                         <Card.Img variant='top' src={post.img}/>
                                         <Card.Body>

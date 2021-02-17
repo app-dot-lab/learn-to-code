@@ -55,6 +55,29 @@ body {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
+.card-retro {
+    border: none;
+    background-color: #00000000;
+}
+
+.card-retro .card-body{
+    padding: 0;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+    background-color: #57CE6A;
+}
+
+.card-retro-content {
+    padding: 1.25rem;
+    background-color: #171C28;
+    transform: translateX(0)  translateY(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-retro:hover .card-retro-content{
+    transform: translateX(4px)  translateY(-4px);
+    transition: transform 0.2s ease-in-out;
+}
+
 /* sidebar */
 
 .logo * {
@@ -62,7 +85,7 @@ body {
 }
 
 .sidebar {
-    z-index: 10000;
+    z-index: 1000;
     background-color: #171C28;
     width: 70px;
     height: 100vh;
@@ -107,6 +130,37 @@ body {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
     background-color: #57CE6A;
     border-radius: 5px;
+}
+
+/* Search */
+
+.search {
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.search .col {
+    margin: 50px;
+}
+
+.search form input{
+    background-color: transparent;
+    border: none;
+    padding: 20px 0;
+    color: white;
+    font-size: 25px;
+    width: 100%;
+    border-bottom: 4px solid #57CE6A;
+    margin: 0 auto;
+}
+
+.search form input:focus {
+    outline: none;
 }
 
 /* posts */

@@ -13,8 +13,14 @@ class Sidebar extends React.Component {
         { icon: icons.Code, text: 'IDE', link: '/ide'},
     ]
 
-    render() {
+    search = () => {
+        var isSearchActive = this.props.isSearchActive
+        console.log('onclick', isSearchActive)
+        isSearchActive = !isSearchActive
+        this.props.searchListener(isSearchActive)
+    }
 
+    render() {
         return (
             <div className='sidebar text-center py-3 px-2'>
                 <div className='logo py-3'>
@@ -26,14 +32,24 @@ class Sidebar extends React.Component {
                 <div className='navbar-items'>
                     { 
                         this.navItems.map((item, index) => {
-                            return (
-                                <NavLink to={item.link} exact activeClassName='navbar-active'>
-                                    <div key={index} className='navbar-item py-4'>
+
+                            if (item.text != 'Search') {
+                                return (
+                                    <NavLink to={item.link} exact activeClassName='navbar-active'>
+                                        <div key={index} className='navbar-item py-4'>
+                                            <item.icon className={`navbar-item-icon`}></item.icon>
+                                            <span className='navbar-item-label'>{item.text}</span>
+                                        </div>
+                                    </NavLink>
+                                )
+                            } else {
+                                return (
+                                    <div onClick={() => this.search()} key={index} className='navbar-item py-4'>
                                         <item.icon className={`navbar-item-icon`}></item.icon>
                                         <span className='navbar-item-label'>{item.text}</span>
                                     </div>
-                                </NavLink>
-                            )
+                                )
+                            }
                         })
                     }
                     
