@@ -1,76 +1,126 @@
-import React from 'react'
-import Backend from '../api/backend'
-import Sidebar from './Sidebar'
-import Posts from './Posts'
-import Home from './Home'
-import {Row, Col, Form} from 'react-bootstrap'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import React from "react";
+import Sidebar from "./Sidebar";
+import { Row, Col, Form } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { ProtectedRoute } from "../protectedRoutes";
+import Posts from "./Posts";
+import Home from "./Home";
+import Login from "./Login";
+import PostItem from "./PostItem";
 
 class App extends React.Component {
+    // gets auth token
+    getToken = () => {
+        return sessionStorage.getItem("token");
+    };
 
-    state = {isSearchActive: false}
+    state = {
+        isSearchActive: false,
+        authToken: this.getToken(),
+        isAuthenticated: false,
+    };
+
+    // sets auth token
+    setToken = (token) => {
+        this.setState({ authToken: token, isAuthenticated: true });
+        sessionStorage.setItem("token", token);
+    };
+
+    isAuthenticated = () => {
+        if (this.state.authToken) {
+            this.setState({ isAuthenticated: true });
+            return true;
+        } else {
+            this.setState({ isAuthenticated: false });
+            return false;
+        }
+    };
+
+    componentDidMount() {
+        this.isAuthenticated();
+    }
 
     // toggling search state
     searchListener = (isSearchActive) => {
-        this.setState({isSearchActive})
+        this.setState({ isSearchActive });
 
-        if(isSearchActive){
+        if (isSearchActive) {
             document.addEventListener("keydown", this.handleSearchEscape);
         } else {
             document.removeEventListener("keydown", this.handleSearchEscape);
         }
-    }
+    };
 
     handleSearchEscape = (e) => {
-        if(e.key == 'Escape') {
-            var isSearchActive = this.state.isSearchActive
-            isSearchActive = !isSearchActive
-            this.setState({isSearchActive})
+        if (e.key == "Escape") {
+            var isSearchActive = this.state.isSearchActive;
+            isSearchActive = !isSearchActive;
+            this.setState({ isSearchActive });
         }
-    }
+    };
 
     render() {
         return (
             <Router>
-                <div>
-                    <Sidebar searchListener={ this.searchListener } isSearchActive={this.state.isSearchActive} />
+                <Sidebar
+                    searchListener={this.searchListener}
+                    isSearchActive={this.state.isSearchActive}
+                />
 
-                    <Switch>
-                        <Route path='/' exact component={Home} />
-                        <Route path='/search' exact component={Search} />
-                        <Route path='/posts' exact component={Posts} />
-                    </Switch>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/search" exact component={Search} />
+                    <ProtectedRoute
+                        isAuthenticated={this.state.isAuthenticated}
+                        path="/posts"
+                        exact
+                        component={Posts}
+                    />
+                    <Route path="/posts/:id" exact component={PostItem} />
+                    <Route
+                        path="/login"
+                        exact
+                        render={(props) => (
+                            <Login setToken={this.setToken} {...props} />
+                        )}
+                    />
+                </Switch>
 
-                    { this.state.isSearchActive && <Search /> }
-                </div>
+                {this.state.isSearchActive && <Search />}
             </Router>
-        )
+        );
     }
 }
 
 class Search extends React.Component {
-
-    componentDidMount() {
-        console.log(this)
-    }
-
-    render(){
+    render() {
         return (
-            <div className='search'>
+            <div className="search">
                 <Row>
                     <Col>
-                        {/* <h1>Search</h1> */}
-                        <Form className='text-center'>
-                            <Form.Group className='mx-auto' style={{width: '80%'}}>
-                                <input type='text' placeholder='Search anything' ref={(input) => { this.searchInput = input; }} />
-                                <p className='text-right mt-2'>Press 'Esc' to close</p>
+                        <Form className="text-center">
+                            <Form.Group
+                                className="mx-auto"
+                                style={{ width: "80%" }}
+                            >
+                                <input
+                                    type="text"
+                                    placeholder="Search anything"
+                                    ref={(input) => {
+                                        this.searchInput = input;
+                                    }}
+                                />
+                                <p className="text-right mt-2">
+                                    Press 'Esc' to close
+                                </p>
                             </Form.Group>
                         </Form>
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 
-export default App
+export default App;

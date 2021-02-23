@@ -11,11 +11,11 @@ class Sidebar extends React.Component {
         { icon: icons.Search, text: 'Search', link: '/search'},
         { icon: icons.MenuBook, text: 'Courses', link: '/posts'},
         { icon: icons.Code, text: 'IDE', link: '/ide'},
+        // { icon: icons.Code, text: 'Login', link: '/login'},
     ]
 
     search = () => {
         var isSearchActive = this.props.isSearchActive
-        console.log('onclick', isSearchActive)
         isSearchActive = !isSearchActive
         this.props.searchListener(isSearchActive)
     }
@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
 
                             if (item.text != 'Search') {
                                 return (
-                                    <NavLink to={item.link} exact activeClassName='navbar-active'>
+                                    <NavLink key={index} to={item.link} exact activeClassName='navbar-active'>
                                         <div key={index} className='navbar-item py-4'>
                                             <item.icon className={`navbar-item-icon`}></item.icon>
                                             <span className='navbar-item-label'>{item.text}</span>
@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
                                 )
                             } else {
                                 return (
-                                    <div onClick={() => this.search()} key={index} className='navbar-item py-4'>
+                                    <div key={index} onClick={() => this.search()} key={index} className='navbar-item py-4'>
                                         <item.icon className={`navbar-item-icon`}></item.icon>
                                         <span className='navbar-item-label'>{item.text}</span>
                                     </div>

@@ -24,8 +24,8 @@ class Home extends React.Component {
                     {
                         this.posts.map((post, index) => {
                             return (
-                                <Col md={12} md={6} className='mb-4'>
-                                    <Card className='card-retro cursor-pointer'>
+                                <Col key={index} md={12} md={6} className='mb-4'>
+                                    <Card className='card-retro cursor-pointer' onClick={{}}>
                                         <Card.Body>
                                             <div className='card-retro-content'>
                                                 <p className='text-secondary'>u/iamashwincherian</p>

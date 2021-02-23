@@ -12,6 +12,14 @@
     color: #57CE6A !important;
 }
 
+.text-black {
+    color: black;
+}
+
+.text-hover-green:hover {
+    color: #57CE6A !important;
+}
+
 .bg-green {
     background-color: #57CE6A !important;
 }
@@ -24,6 +32,19 @@
     background-color: #171C28 !important;
 }
 
+.fw-5 {
+    font-weight: 500;
+}
+.fw-6 {
+    font-weight: 600;
+}
+.fw-7 {
+    font-weight: 700;
+}
+.fw-8 {
+    font-weight: 800;
+}
+
 /* body */
 body {
     box-sizing: border-box;
@@ -32,12 +53,26 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: white;
     background-color: #121722;
+    letter-spacing: 0.7px;
 }
 
 .main-container {
     margin-left: 70px;
     padding: 30px;
     min-height: 100vh;
+    max-width: 100vw;
+}
+
+hr {
+    background-color: #19202f;
+    height: 0.4px;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus{
+    outline: none !important;
 }
 
 .cursor-pointer {
@@ -53,6 +88,10 @@ body {
 .card-dark .card-body {
     background-color: #171C28;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-dark .card-text {
+    letter-spacing: 1px;
 }
 
 .card-retro {
@@ -76,6 +115,46 @@ body {
 .card-retro:hover .card-retro-content{
     transform: translateX(4px)  translateY(-4px);
     transition: transform 0.2s ease-in-out;
+}
+
+.card-login {
+    margin-top: 50px;
+}
+
+.login-form button,
+.login-form button:focus {
+    border: none !important;
+}
+
+/* Forms */
+
+.input-dark,
+.input-dark:focus {
+    border: none;
+    outline: none;
+    background-color: #121722;
+    padding: 20px 15px;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.social-auth-button {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.social-auth-button p {
+    font-size: 18px;
+}
+
+.social-auth-button img {
+    height: 22px;
+    width: auto;
+    transform: translateY(-3px);
 }
 
 /* sidebar */
