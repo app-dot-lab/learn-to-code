@@ -1,38 +1,42 @@
 import React from "react";
-import {Row,Col,Card} from 'react-bootstrap'
-import {ExpandLess, ExpandMore} from '@material-ui/icons'
+import { Row, Col, Card } from "react-bootstrap";
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
+
+import Backend from "../api/backend";
 
 class PostItem extends React.Component {
+    state = { post: { author: {} } };
+
     componentDidMount() {
-        console.log(this)
+        const postId = this.props.match.params.id;
+        Backend.get(`/posts/${postId}`)
+            .then((res) => {
+                this.setState({ post: res.data });
+            })
+            .catch((err) => console.log(err));
     }
-
-    postId = this.props.match.params.id;
-    title = 'How to update App props when web component attributes are updated async?'
-    desc = `Hi,
-
-    I'm working on a REACT form, that's gonna be used as a web component in a Drupal site.
-    
-    The web component part went fine, but as shown in the example, I'm having issues updating properties in the App component, when attributes are updated after created on the web component.
-    
-    code example: https://stackblitz.com/edit/react-ts-nypnbz?file=index.tsx
-    
-    What am I missing to get the token value sent to <App /> when its updated by the setTimeout on the host page?
-    
-    `
 
     render() {
         return (
             <div className="main-container">
-                <Col md={8} className='my-4 p-0'>
-                    <Card className='card-dark cursor-pointer mb-4' onClick={{}}>
-                        <Card.Body className='p-4'>
-
-                            <div className='post mb-2'>
-                                <p className='h2'>{this.title}</p>
-                                <p className='h6 text-secondary text-hover-green'>u/iamashwincherian</p>
-                                <p className='h5 text-secondary'>{this.desc}</p>
-                                <span className='text-green'><ExpandLess></ExpandLess> 14</span><span className='text-secondary'><ExpandMore className='text-secondary'></ExpandMore> 0</span>
+                <Col md={8} className="my-4 p-0">
+                    <Card className="card-dark cursor-pointer mb-4">
+                        <Card.Body className="p-4">
+                            <div className="post mb-2">
+                                <p className="h2">{this.state.post.title}</p>
+                                <p className="h6 text-secondary text-hover-green">
+                                    u/{this.state.post.author.username}
+                                </p>
+                                <p className="h5 text-secondary">
+                                    {this.state.post.body}
+                                </p>
+                                <span className="text-green">
+                                    <ExpandLess></ExpandLess> 14
+                                </span>
+                                <span className="text-secondary">
+                                    <ExpandMore className="text-secondary"></ExpandMore>{" "}
+                                    0
+                                </span>
                             </div>
 
                             {/* <div className='comments mt-4'>
@@ -46,17 +50,27 @@ class PostItem extends React.Component {
                         </Card.Body>
                     </Card>
 
-                    <div className='mt-4'>
+                    {/* Comments */}
+
+                    {/* <div className="mt-4">
                         <hr></hr>
-                        <Card className='card-dark cursor-pointer' onClick={{}}>
-                            <Card.Body className='p-4'>
-                                <p className='h4'>asdasd</p>
-                                <p className='h6 text-secondary text-hover-green'>u/iamashwincherian</p>
-                                <p className='h5 text-secondary'></p>
-                                <span className='text-green'><ExpandLess></ExpandLess> 14</span><span className='text-secondary'><ExpandMore className='text-secondary'></ExpandMore> 0</span>
+                        <Card className="card-dark cursor-pointer">
+                            <Card.Body className="p-4">
+                                <p className="h4">asdasd</p>
+                                <p className="h6 text-secondary text-hover-green">
+                                    u/iamashwincherian
+                                </p>
+                                <p className="h5 text-secondary"></p>
+                                <span className="text-green">
+                                    <ExpandLess></ExpandLess> 14
+                                </span>
+                                <span className="text-secondary">
+                                    <ExpandMore className="text-secondary"></ExpandMore>{" "}
+                                    0
+                                </span>
                             </Card.Body>
                         </Card>
-                    </div>
+                    </div> */}
                 </Col>
             </div>
         );

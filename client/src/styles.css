@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 /* colors */
 
@@ -9,7 +9,7 @@
 */
 
 .text-green {
-    color: #57CE6A !important;
+    color: #57ce6a !important;
 }
 
 .text-black {
@@ -17,11 +17,11 @@
 }
 
 .text-hover-green:hover {
-    color: #57CE6A !important;
+    color: #57ce6a !important;
 }
 
 .bg-green {
-    background-color: #57CE6A !important;
+    background-color: #57ce6a !important;
 }
 
 .bg-dark1 {
@@ -29,7 +29,7 @@
 }
 
 .bg-dark2 {
-    background-color: #171C28 !important;
+    background-color: #171c28 !important;
 }
 
 .fw-5 {
@@ -50,7 +50,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: white;
     background-color: #121722;
     letter-spacing: 0.7px;
@@ -68,15 +68,33 @@ hr {
     height: 0.4px;
 }
 
+button {
+    border: none !important;
+}
+
 button:focus,
 input:focus,
 textarea:focus,
-select:focus{
+select:focus {
     outline: none !important;
+}
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: inherit;
+    color: inherit;
 }
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.w-content {
+    width: max-content;
 }
 
 /* Card */
@@ -86,7 +104,7 @@ select:focus{
 }
 
 .card-dark .card-body {
-    background-color: #171C28;
+    background-color: #171c28;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -99,21 +117,21 @@ select:focus{
     background-color: #00000000;
 }
 
-.card-retro .card-body{
+.card-retro .card-body {
     padding: 0;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
-    background-color: #57CE6A;
+    background-color: #57ce6a;
 }
 
 .card-retro-content {
     padding: 1.25rem;
-    background-color: #171C28;
-    transform: translateX(0)  translateY(0);
+    background-color: #171c28;
+    transform: translateX(0) translateY(0);
     transition: transform 0.2s ease-in-out;
 }
 
-.card-retro:hover .card-retro-content{
-    transform: translateX(4px)  translateY(-4px);
+.card-retro:hover .card-retro-content {
+    transform: translateX(4px) translateY(-4px);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -165,7 +183,7 @@ select:focus{
 
 .sidebar {
     z-index: 1000;
-    background-color: #171C28;
+    background-color: #171c28;
     width: 70px;
     height: 100vh;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
@@ -173,7 +191,7 @@ select:focus{
 }
 
 .navbar-active .navbar-item-icon {
-    color: #57CE6A !important;
+    color: #57ce6a !important;
 }
 
 .navbar-item {
@@ -183,12 +201,12 @@ select:focus{
 
 .navbar-item .navbar-item-icon {
     font-size: 35px;
-    color: #54607D;
+    color: #54607d;
 }
 
 .navbar-item:hover .navbar-item-icon {
-    color: #57CE6A;
-    transition: color 0.2s ease-in-out
+    color: #57ce6a;
+    transition: color 0.2s ease-in-out;
 }
 
 .navbar-item:hover .navbar-item-label {
@@ -207,7 +225,7 @@ select:focus{
     font-weight: bold;
     letter-spacing: 1.5px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
-    background-color: #57CE6A;
+    background-color: #57ce6a;
     border-radius: 5px;
 }
 
@@ -227,14 +245,14 @@ select:focus{
     margin: 50px;
 }
 
-.search form input{
+.search form input {
     background-color: transparent;
     border: none;
     padding: 20px 0;
     color: white;
     font-size: 25px;
     width: 100%;
-    border-bottom: 4px solid #57CE6A;
+    border-bottom: 4px solid #57ce6a;
     margin: 0 auto;
 }
 
@@ -249,5 +267,5 @@ select:focus{
     /* border: 1px solid #57CE6A; */
     border-radius: 3px;
     margin: 0 15px 10px 0;
-    color: #57CE6A;
+    color: #57ce6a;
 }

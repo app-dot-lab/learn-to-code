@@ -1,47 +1,79 @@
-import React from 'react'
-import {Card, Row, Col} from 'react-bootstrap'
-import {ExpandLess, ExpandMore} from '@material-ui/icons'
+import React from "react";
+import { Card, Row, Col } from "react-bootstrap";
+import { ExpandLess, ExpandMore, Add } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+
+import Backend from "../api/backend";
 
 class Home extends React.Component {
+    state = { posts: [] };
 
-    posts = [
-        { title: 'Keystone Flags: Feature Flagging With Less Mess' },
-        { title: 'My almost dream office setup!' },
-        { title: 'VS Code: Forgot History On Launch' },
-        { title: 'Testing out some features from the Golang 1.16 Beta (Embedded files)' },
-        { title: 'Some Code Refactor Tips for Junior Developers' },
-        { title: 'Please help with code from hacked server' },
-        { title: 'Coming to DevOps? Learn how to code' },
-        { title: 'How can Stackoverflow make you a better developer' },
-    ]
+    componentDidMount() {
+        Backend.get("/posts").then((res) => {
+            var posts = res.data;
+            if (posts.length > 0) this.setState({ posts });
+        });
+    }
 
     render() {
         return (
-            <div className='main-container'>
-                <h1>Posts</h1>
+            <div className="main-container">
+                <Row>
+                    <Col>
+                        <h1>Posts</h1>
+                    </Col>
+                    <Col className="text-right my-auto">
+                        <a className="btn btn-sm btn-outline-success ">
+                            <Add className='mr-2' />
+                            <span className='my-auto'><Link to={{
+                                pathname: '/posts/new',
+                                state: {
+                                    applied: true
+                                }
+                            }}>Create New</Link></span>
+                        </a>
+                    </Col>
+                </Row>
                 <br></br>
-                <Row className='posts'>
-                    {
-                        this.posts.map((post, index) => {
-                            return (
-                                <Col key={index} md={12} md={6} className='mb-4'>
-                                    <Card className='card-retro cursor-pointer' onClick={{}}>
+                <Row className="posts">
+                    {this.state.posts.map((post, index) => {
+                        return (
+                            <Col key={index} md={12} md={6} className="mb-4">
+                                <Link
+                                    to={{
+                                        pathname: `/posts/${post._id}`,
+                                        state: {
+                                            applied: true,
+                                        },
+                                    }}
+                                >
+                                    <Card className="card-retro cursor-pointer">
                                         <Card.Body>
-                                            <div className='card-retro-content'>
-                                                <p className='text-secondary'>u/iamashwincherian</p>
-                                                <Card.Title className='h3'>{post.title}</Card.Title>
-                                                <span className='text-green'><ExpandLess></ExpandLess> 14</span><span className='text-secondary'><ExpandMore className='text-secondary'></ExpandMore> 0</span>
+                                            <div className="card-retro-content">
+                                                <p className="text-secondary">
+                                                    u/iamashwincherian
+                                                </p>
+                                                <Card.Title className="h3">
+                                                    {post.title}
+                                                </Card.Title>
+                                                <span className="text-green">
+                                                    <ExpandLess></ExpandLess> 14
+                                                </span>
+                                                <span className="text-secondary">
+                                                    <ExpandMore className="text-secondary"></ExpandMore>{" "}
+                                                    0
+                                                </span>
                                             </div>
                                         </Card.Body>
                                     </Card>
-                                </Col>
-                            )
-                        })
-                    }
+                                </Link>
+                            </Col>
+                        );
+                    })}
                 </Row>
             </div>
-        )
+        );
     }
 }
 
-export default Home
+export default Home;

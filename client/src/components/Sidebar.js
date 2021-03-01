@@ -9,7 +9,7 @@ class Sidebar extends React.Component {
     navItems = [
         { icon: icons.Apps, text: 'Home', link: '/'},
         { icon: icons.Search, text: 'Search', link: '/search'},
-        { icon: icons.MenuBook, text: 'Courses', link: '/posts'},
+        { icon: icons.MenuBook, text: 'Courses', link: '/courses'},
         { icon: icons.Code, text: 'IDE', link: '/ide'},
         // { icon: icons.Code, text: 'Login', link: '/login'},
     ]

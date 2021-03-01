@@ -4,10 +4,11 @@ import { Row, Col, Form } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ProtectedRoute } from "../protectedRoutes";
-import Posts from "./Posts";
+import Courses from "./Courses";
 import Home from "./Home";
 import Login from "./Login";
 import PostItem from "./PostItem";
+import NewPost from "./NewPost";
 
 class App extends React.Component {
     // gets auth token
@@ -73,10 +74,11 @@ class App extends React.Component {
                     <Route path="/search" exact component={Search} />
                     <ProtectedRoute
                         isAuthenticated={this.state.isAuthenticated}
-                        path="/posts"
+                        path="/courses"
                         exact
-                        component={Posts}
+                        component={Courses}
                     />
+                    <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/posts/new" exact component={NewPost} />
                     <Route path="/posts/:id" exact component={PostItem} />
                     <Route
                         path="/login"

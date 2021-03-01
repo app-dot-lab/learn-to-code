@@ -38,7 +38,7 @@ class Login extends React.Component {
                 </h2>
 
                 <Row>
-                    <Col xl={5} lg={8} md={10} xs={12} className="mx-auto">
+                    <Col xl={4} lg={8} md={10} xs={12} className="mx-auto">
                         <Card className="card-dark card-login text-left">
                             <Card.Body className="p-4">
                                 <Form
