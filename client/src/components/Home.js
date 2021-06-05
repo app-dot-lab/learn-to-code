@@ -23,15 +23,18 @@ class Home extends React.Component {
                         <h1>Posts</h1>
                     </Col>
                     <Col className="text-right my-auto">
-                        <a className="btn btn-sm btn-outline-success ">
-                            <Add className='mr-2' />
-                            <span className='my-auto'><Link to={{
-                                pathname: '/posts/new',
+                        <Link
+                            className="btn btn-sm btn-outline-success"
+                            to={{
+                                pathname: "/posts/new",
                                 state: {
-                                    applied: true
-                                }
-                            }}>Create New</Link></span>
-                        </a>
+                                    applied: true,
+                                },
+                            }}
+                        >
+                            <Add className="mr-2" />
+                            <span className="my-auto">Create New</span>
+                        </Link>
                     </Col>
                 </Row>
                 <br></br>
@@ -51,7 +54,7 @@ class Home extends React.Component {
                                         <Card.Body>
                                             <div className="card-retro-content">
                                                 <p className="text-secondary">
-                                                    u/iamashwincherian
+                                                    u/{post.author.username}
                                                 </p>
                                                 <Card.Title className="h3">
                                                     {post.title}

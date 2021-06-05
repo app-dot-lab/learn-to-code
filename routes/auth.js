@@ -9,8 +9,9 @@ router.get("/user", (req, res) => {
     res.send(req.user);
 });
 
-router.post("/login", passport.authenticate("local", {}), (req, res) => {
+router.post("/login", passport.authenticate("local"), (req, res) => {
     const token = jwt.sign({ id: req.user.username }, "secret");
+    console.log(req.user)
     res.send({
         auth: true,
         token: token,

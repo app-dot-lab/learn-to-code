@@ -52,13 +52,13 @@ class PostItem extends React.Component {
 
                     {/* Comments */}
 
-                    {/* <div className="mt-4">
+                    <div className="mt-4">
                         <hr></hr>
                         <Card className="card-dark cursor-pointer">
                             <Card.Body className="p-4">
-                                <p className="h4">asdasd</p>
+                                <p className="h4">Great Work!</p>
                                 <p className="h6 text-secondary text-hover-green">
-                                    u/iamashwincherian
+                                    u/anonymous
                                 </p>
                                 <p className="h5 text-secondary"></p>
                                 <span className="text-green">
@@ -70,7 +70,7 @@ class PostItem extends React.Component {
                                 </span>
                             </Card.Body>
                         </Card>
-                    </div> */}
+                    </div>
                 </Col>
             </div>
         );
