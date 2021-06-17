@@ -10,11 +10,15 @@ router.get("/user", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-    const token = jwt.sign({ id: req.user.username }, "secret");
+    const token = jwt.sign({ username: req.user.username }, process.env.JWT_SECRET);
     console.log(req.user)
     res.send({
         auth: true,
-        token: token,
+        user: {
+            token,
+            email: req.user.email,
+            username: req.user.username
+        },
         message: "User authenticated",
     });
 });
@@ -31,13 +35,12 @@ router.post("/signup", async (req, res, next) => {
         const newUser = await User.register(user, req.body.password1);
         req.login(newUser, (err) => {
             if (err) return next(err);
-            const token = jwt.sign({ id: user.username }, "secret");
+            const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET);
             res.send({
                 auth: true,
                 token: token,
                 message: "User authenticated",
             });
-            // res.send(`successfully authenticated: ${req.user}`);
         });
     } catch (err) {
         res.send(err);
