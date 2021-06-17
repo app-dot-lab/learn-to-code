@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Card, Form } from "react-bootstrap";
 
-import Backend from '../api/backend'
+import Backend from '../../api/backend'
 
 const NewPost = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
     const createNewPost = () => {
-        Backend.post('/posts', {
-            title,
-            body,
-        })
+        const data = {title,body}
+        console.log(data)
+        Backend.post('/posts', data)
         .then(res => {
             console.log('Successfully created')
+        })
+        .catch(err => {
+            console.error('error', err)
         })
     }
 
@@ -40,15 +42,13 @@ const NewPost = () => {
                                         placeholder="Enter Title"
                                         required
                                         onChange={(e) =>
-                                            setTitle({
-                                                title: e.target.value,
-                                            })
+                                            setTitle(e.target.value)
                                         }
                                     />
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label className="text-secondary">
-                                        Password
+                                        Body
                                     </Form.Label>
                                     <Form.Control
                                         className="input-dark shadow-none px-4 py-3"
