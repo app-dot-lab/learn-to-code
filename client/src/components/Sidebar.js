@@ -1,62 +1,59 @@
 import React from 'react'
 import * as icons from '@material-ui/icons';
 import {NavLink} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
-class Sidebar extends React.Component {
+const Sidebar = (props) => {
+    const auth = useSelector(state => state.auth)
 
-    state = { activeNav: 0 }
-
-    navItems = [
+    const navItems = [
         { icon: icons.Apps, text: 'Home', link: '/'},
         { icon: icons.Search, text: 'Search', link: '/search'},
         { icon: icons.MenuBook, text: 'Courses', link: '/courses'},
         { icon: icons.Code, text: 'IDE', link: '/ide'},
-        // { icon: icons.Code, text: 'Login', link: '/login'},
     ]
 
-    search = () => {
-        var isSearchActive = this.props.isSearchActive
-        isSearchActive = !isSearchActive
-        this.props.searchListener(isSearchActive)
-    }
+    auth.isLoggedIn
+        ? navItems.push({ icon: icons.MeetingRoom, text: 'Logout', link: '/logout'})
+        : navItems.push({ icon: icons.PersonOutline, text: 'Login', link: '/login'})
 
-    render() {
-        return (
-            <div className='sidebar text-center py-3 px-2'>
-                <div className='logo py-3'>
-                    <h1 className='text-center text-green font-weight-medium'>{"{ }"}</h1>
-                </div>
+    const onSearch = () => props.searchListener(true)
 
-                <br></br>
+    return (
+        <div className='sidebar text-center py-3 px-2'>
+            <div className='logo py-3'>
+                <h1 className='text-center text-green font-weight-medium'>{"{ }"}</h1>
+            </div>
 
-                <div className='navbar-items'>
-                    { 
-                        this.navItems.map((item, index) => {
+            <br></br>
 
-                            if (item.text != 'Search') {
-                                return (
-                                    <NavLink key={index} to={item.link} exact activeClassName='navbar-active'>
-                                        <div key={index} className='navbar-item py-4'>
-                                            <item.icon className={`navbar-item-icon`}></item.icon>
-                                            <span className='navbar-item-label'>{item.text}</span>
-                                        </div>
-                                    </NavLink>
-                                )
-                            } else {
-                                return (
-                                    <div key={index} onClick={() => this.search()} key={index} className='navbar-item py-4'>
+            <div className='navbar-items'>
+                { 
+                    navItems.map((item, index) => {
+
+                        if (item.text != 'Search') {
+                            return (
+                                <NavLink key={index} to={{ pathname: item.link, state: {from: props.location}}} exact activeClassName='navbar-active'>
+                                    <div key={index} className='navbar-item py-4'>
                                         <item.icon className={`navbar-item-icon`}></item.icon>
                                         <span className='navbar-item-label'>{item.text}</span>
                                     </div>
-                                )
-                            }
-                        })
-                    }
-                    
-                </div>
+                                </NavLink>
+                            )
+                        } else {
+                            return (
+                                <div key={index} onClick={() => onSearch()} key={index} className='navbar-item py-4'>
+                                    <item.icon className={`navbar-item-icon`}></item.icon>
+                                    <span className='navbar-item-label'>{item.text}</span>
+                                </div>
+                            )
+                        }
+                    })
+                }
+                
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Sidebar

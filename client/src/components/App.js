@@ -1,128 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-import { Row, Col, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ProtectedRoute } from "../protectedRoutes";
 import Courses from "./Courses";
 import Home from "./Home";
 import Login from "./Login";
+import Logout from "./Logout";
 import PostItem from "./PostItem";
-import NewPost from "./NewPost";
+import NewPost from "./posts/NewPost";
+import Search from "./Search";
 
-class App extends React.Component {
-    // gets auth token
-    getToken = () => {
-        return sessionStorage.getItem("token");
-    };
+const App = () => {
+    const [searchActive, setSearchActive] = useState(false)
+    const auth = useSelector(state => state.auth)
 
-    state = {
-        isSearchActive: false,
-        authToken: this.getToken(),
-        isAuthenticated: false,
-    };
-
-    // sets auth token
-    setToken = (token) => {
-        this.setState({ authToken: token, isAuthenticated: true });
-        sessionStorage.setItem("token", token);
-    };
-
-    isAuthenticated = () => {
-        if (this.state.authToken) {
-            this.setState({ isAuthenticated: true });
-            return true;
+    const searchListener = isActive => {
+        setSearchActive(isActive)
+        if (isActive) {
+            document.addEventListener("keydown", handleSearchEscape);
         } else {
-            this.setState({ isAuthenticated: false });
-            return false;
+            document.removeEventListener("keydown", handleSearchEscape);
         }
     };
 
-    componentDidMount() {
-        this.isAuthenticated();
-    }
-
-    // toggling search state
-    searchListener = (isSearchActive) => {
-        this.setState({ isSearchActive });
-
-        if (isSearchActive) {
-            document.addEventListener("keydown", this.handleSearchEscape);
-        } else {
-            document.removeEventListener("keydown", this.handleSearchEscape);
+    const handleSearchEscape = (e) => {
+        if (e.key === "Escape") {
+            setSearchActive(false)
         }
     };
 
-    handleSearchEscape = (e) => {
-        if (e.key == "Escape") {
-            var isSearchActive = this.state.isSearchActive;
-            isSearchActive = !isSearchActive;
-            this.setState({ isSearchActive });
-        }
-    };
+    return (
+        <Router>
+            <Sidebar searchListener={searchListener} />
 
-    render() {
-        return (
-            <Router>
-                <Sidebar
-                    searchListener={this.searchListener}
-                    isSearchActive={this.state.isSearchActive}
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/search" exact component={Search} />
+                <ProtectedRoute
+                    isAuthenticated={auth.isLoggedIn}
+                    path="/courses"
+                    exact
+                    component={Courses}
                 />
+                <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/posts/new" exact component={NewPost} />
+                <Route path="/posts/:id" exact component={PostItem} />
+                <Route path="/login" exact component={Login}/>
+                <Route path="/logout" exact component={Logout}/>
+            </Switch>
 
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/search" exact component={Search} />
-                    <ProtectedRoute
-                        isAuthenticated={this.state.isAuthenticated}
-                        path="/courses"
-                        exact
-                        component={Courses}
-                    />
-                    <ProtectedRoute isAuthenticated={this.state.isAuthenticated} path="/posts/new" exact component={NewPost} />
-                    <Route path="/posts/:id" exact component={PostItem} />
-                    <Route
-                        path="/login"
-                        exact
-                        render={(props) => (
-                            <Login setToken={this.setToken} {...props} />
-                        )}
-                    />
-                </Switch>
+            {searchActive && <Search />}
 
-                {this.state.isSearchActive && <Search />}
-            </Router>
-        );
-    }
-}
-
-class Search extends React.Component {
-    render() {
-        return (
-            <div className="search">
-                <Row>
-                    <Col>
-                        <Form className="text-center">
-                            <Form.Group
-                                className="mx-auto"
-                                style={{ width: "80%" }}
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Search anything"
-                                    ref={(input) => {
-                                        this.searchInput = input;
-                                    }}
-                                />
-                                <p className="text-right mt-2">
-                                    Press 'Esc' to close
-                                </p>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                </Row>
-            </div>
-        );
-    }
+        </Router>
+    );
 }
 
 export default App;
