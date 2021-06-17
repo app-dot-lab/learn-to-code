@@ -10,6 +10,7 @@ var MongoStore = require("connect-mongo")(session);
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var GoogleStrategy = require("passport-google-auth").OAuth2Strategy;
+var dotenv = require("dotenv")
 
 var db = require("./utils/db");
 var User = require("./models/user");
@@ -21,6 +22,7 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 
+dotenv.config()
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,7 +36,7 @@ app.use(
 );
 app.use(
     session({
-        secret: "Code Secret",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
         store: new MongoStore({
