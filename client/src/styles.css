@@ -184,8 +184,8 @@ a:hover {
 .sidebar {
     z-index: 1000;
     background-color: #171c28;
-    width: 70px;
     height: 100vh;
+    width: 60px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
     position: fixed;
 }
@@ -200,7 +200,7 @@ a:hover {
 }
 
 .navbar-item .navbar-item-icon {
-    font-size: 35px;
+    font-size: 30px;
     color: #54607d;
 }
 
@@ -219,9 +219,9 @@ a:hover {
     position: absolute;
     transform: scale(0) translateX(0);
     transition: transform 0.2s ease-in-out;
-    margin-top: 2px;
     color: #121722;
-    padding: 8px 15px;
+    padding: 6px 13px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: 1.5px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
