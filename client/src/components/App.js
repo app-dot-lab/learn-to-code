@@ -46,8 +46,9 @@ const App = () => {
                     component={Courses}
                 />
                 <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/posts/new" exact component={NewPost} />
+                <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/ide" exact component={IDE} />
                 <Route path="/posts/:id" exact component={PostItem} />
-                <Route path="/ide" exact component={IDE} />
+                {/* <Route path="/ide" exact component={IDE} /> */}
                 <Route path="/login" exact component={Login}/>
                 <Route path="/logout" exact component={Logout}/>
             </Switch>
