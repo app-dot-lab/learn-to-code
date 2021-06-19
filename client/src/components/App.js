@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "../protectedRoutes";
 import Courses from "./Courses";
 import Home from "./Home";
+import Posts from "./posts/Posts";
 import Login from "./Login";
 import Logout from "./Logout";
 import PostItem from "./PostItem";
@@ -37,6 +38,7 @@ const App = () => {
 
             <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/posts" exact component={Posts} />
                 <Route path="/search" exact component={Search} />
                 <ProtectedRoute
                     isAuthenticated={auth.isLoggedIn}
