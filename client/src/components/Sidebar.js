@@ -7,7 +7,7 @@ const Sidebar = (props) => {
     const auth = useSelector(state => state.auth)
 
     const navItems = [
-        { icon: icons.Apps, text: 'Home', link: '/'},
+        { icon: icons.Subject, text: 'Posts', link: '/posts'},
         { icon: icons.Search, text: 'Search', link: '/search'},
         { icon: icons.MenuBook, text: 'Courses', link: '/courses'},
         { icon: icons.Code, text: 'IDE', link: '/ide'},
@@ -22,7 +22,7 @@ const Sidebar = (props) => {
     return (
         <div className='sidebar text-center py-3 px-2'>
             <div className='logo py-3'>
-                <h1 className='text-center text-green font-weight-medium'>{"{ }"}</h1>
+                <h1 className='text-center text-color-primary font-weight-medium'>{"{ }"}</h1>
             </div>
 
             <br></br>
