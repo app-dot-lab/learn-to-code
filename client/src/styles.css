@@ -3,25 +3,56 @@
 /* colors */
 
 /* 
-    Primary green : #57CE6A 
     Dark #1 : #121722
     Dark #2 : #171C28
 */
 
-.text-green {
-    color: #57ce6a !important;
+:root {
+    /* --color-primary: #57ce6a; */
+    --color-primary: #f1c40f;
+}
+
+.text-color-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-color-primary:hover {   
+    color: var(--color-primary) !important;
 }
 
 .text-black {
     color: black;
 }
 
-.text-hover-green:hover {
-    color: #57ce6a !important;
+.text-hover-primary:hover {
+    color: var(--color-primary) !important;
 }
 
-.bg-green {
-    background-color: #57ce6a !important;
+.btn-color-primary {
+    color: var(--color-primary) !important;
+}
+
+.btn-color-primary:hover {
+    color: white !important;
+    background-color: var(--color-primary) !important;
+}
+
+.btn-color-outline-primary {
+    color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+}
+
+.btn-color-outline-primary:hover {
+    color: black !important;
+    background-color: var(--color-primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-outline-primary {
+    border: var(--color-primary) 1px solid;
 }
 
 .bg-dark1 {
@@ -120,7 +151,7 @@ a:hover {
 .card-retro .card-body {
     padding: 0;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
-    background-color: #57ce6a;
+    background-color: var(--color-primary);
 }
 
 .card-retro-content {
@@ -184,14 +215,14 @@ a:hover {
 .sidebar {
     z-index: 1000;
     background-color: #171c28;
-    width: 70px;
     height: 100vh;
+    width: 60px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
     position: fixed;
 }
 
 .navbar-active .navbar-item-icon {
-    color: #57ce6a !important;
+    color: var(--color-primary) !important;
 }
 
 .navbar-item {
@@ -200,12 +231,12 @@ a:hover {
 }
 
 .navbar-item .navbar-item-icon {
-    font-size: 35px;
+    font-size: 30px;
     color: #54607d;
 }
 
 .navbar-item:hover .navbar-item-icon {
-    color: #57ce6a;
+    color: var(--color-primary);
     transition: color 0.2s ease-in-out;
 }
 
@@ -219,13 +250,13 @@ a:hover {
     position: absolute;
     transform: scale(0) translateX(0);
     transition: transform 0.2s ease-in-out;
-    margin-top: 2px;
     color: #121722;
-    padding: 8px 15px;
+    padding: 6px 13px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: 1.5px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
-    background-color: #57ce6a;
+    background-color: var(--color-primary);
     border-radius: 5px;
 }
 
@@ -252,7 +283,7 @@ a:hover {
     color: white;
     font-size: 25px;
     width: 100%;
-    border-bottom: 4px solid #57ce6a;
+    border-bottom: 4px solid var(--color-primary);
     margin: 0 auto;
 }
 
@@ -264,8 +295,8 @@ a:hover {
 
 .tag {
     padding: 7px 12px;
-    /* border: 1px solid #57CE6A; */
+    /* border: 1px solid var(--color-primary); */
     border-radius: 3px;
     margin: 0 15px 10px 0;
-    color: #57ce6a;
+    color: var(--color-primary);
 }
