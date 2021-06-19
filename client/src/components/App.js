@@ -11,6 +11,7 @@ import Logout from "./Logout";
 import PostItem from "./PostItem";
 import NewPost from "./posts/NewPost";
 import Search from "./Search";
+import IDE from "./ide/IDE";
 
 const App = () => {
     const [searchActive, setSearchActive] = useState(false)
@@ -45,7 +46,9 @@ const App = () => {
                     component={Courses}
                 />
                 <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/posts/new" exact component={NewPost} />
+                <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/ide" exact component={IDE} />
                 <Route path="/posts/:id" exact component={PostItem} />
+                {/* <Route path="/ide" exact component={IDE} /> */}
                 <Route path="/login" exact component={Login}/>
                 <Route path="/logout" exact component={Logout}/>
             </Switch>
