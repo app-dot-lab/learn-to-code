@@ -9,7 +9,24 @@
 
 :root {
     /* --color-primary: #57ce6a; */
-    --color-primary: #f1c40f;
+    // --color-primary: #f1c40f;
+}
+
+body {
+    --bg-color: #dddddd;
+    --color-primary: #57ce6a;
+    --text-color: #202020;
+    --card-bg: #e6e6e6;
+    --sidebar-bg: #dddddd;
+    --sidebar-item-color: #484848;
+}
+
+body.dark {
+    --bg-color: #121722;
+    --text-color: #f3f3f3;
+    --card-bg: #171c28;
+    --sidebar-bg: #171c28;
+    --sidebar-item-color: #54607d;
 }
 
 .text-color-primary {
@@ -82,8 +99,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Montserrat", sans-serif;
-    color: white;
-    background-color: #121722;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     letter-spacing: 0.7px;
 }
 
@@ -130,12 +147,12 @@ a:hover {
 
 /* Card */
 
-.card-dark {
+.card {
     border: none;
 }
 
-.card-dark .card-body {
-    background-color: #171c28;
+.card .card-body {
+    background-color: var(--card-bg);
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -145,7 +162,6 @@ a:hover {
 
 .card-retro {
     border: none;
-    background-color: #00000000;
 }
 
 .card-retro .card-body {
@@ -155,8 +171,7 @@ a:hover {
 }
 
 .card-retro-content {
-    padding: 1.25rem;
-    background-color: #171c28;
+    background-color: var(--card-bg);
     transform: translateX(0) translateY(0);
     transition: transform 0.2s ease-in-out;
 }
@@ -177,8 +192,8 @@ a:hover {
 
 /* Forms */
 
-.input-dark,
-.input-dark:focus {
+.input,
+.input:focus {
     border: none;
     outline: none;
     background-color: #121722;
@@ -186,6 +201,14 @@ a:hover {
     font-size: 20px;
     font-weight: 500;
     color: white;
+}
+
+.input-transparent,
+.input-transparent:focus {
+    background: none;
+    outline: none;
+    border: none;
+    box-shadow: none;
 }
 
 .social-auth-button {
@@ -214,11 +237,20 @@ a:hover {
 
 .sidebar {
     z-index: 1000;
-    background-color: #171c28;
+    background-color: var(--sidebar-bg);
     height: 100vh;
     width: 60px;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.15);
     position: fixed;
+}
+
+.navbar-items-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .navbar-active .navbar-item-icon {
@@ -232,7 +264,7 @@ a:hover {
 
 .navbar-item .navbar-item-icon {
     font-size: 30px;
-    color: #54607d;
+    color: var(--sidebar-item-color);
 }
 
 .navbar-item:hover .navbar-item-icon {
