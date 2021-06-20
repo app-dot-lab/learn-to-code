@@ -1,6 +1,8 @@
 import React from 'react'
 import {Row, Col, Card} from 'react-bootstrap'
 
+import RetroCard from '../cards/RetroCard'
+
 class Courses extends React.Component {
 
     courses = [
@@ -72,25 +74,23 @@ class Courses extends React.Component {
                         this.courses.map((course, index) => {
                             return (
                                 <Col key={index} sm={12} md={6} lg={4} xl={3}>
-                                    <Card className='card-dark cursor-pointer mb-5'>
-                                        <Card.Img variant='top' src={course.img}/>
-                                        <Card.Body>
-                                            <h3><strong>{course.title}</strong></h3>
-                                            <p className='text-secondary h5'>{course.desc}</p>
-                                            <div className='tags mt-4'>
-                                                {
-                                                    course.tags.map((tag, index2) => {
-                                                        return <span key={index2} className='tag' style={{border: `1px solid ${course.color}`, color: `${course.color}`}}>{tag}</span>
-                                                    })
-                                                }
-                                            </div>
-                                        </Card.Body>
-                                    </Card>
+                                    <RetroCard img={course.img}>
+                                        <p className='h4'>{course.title}</p>
+                                        <p className='text-secondary'>{course.desc}</p>
+                                        <div className='tags mt-4'>
+                                            {
+                                                course.tags.map((tag, index2) => {
+                                                    return <span key={index2} className='tag' style={{border: `1px solid ${course.color}`, color: `${course.color}`}}>{tag}</span>
+                                                })
+                                            }
+                                        </div>
+                                    </RetroCard>
                                 </Col>
                             )
                         })
                     }
                 </Row>
+
             </div>
         )
     }
