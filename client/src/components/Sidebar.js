@@ -28,14 +28,14 @@ const Sidebar = (props) => {
             <br></br>
 
             <div className='navbar-items'>
-                { 
+                {
                     navItems.map((item, index) => {
 
                         if (item.text != 'Search') {
                             return (
                                 <NavLink key={index} to={{ pathname: item.link, state: {from: props.location}}} exact activeClassName='navbar-active'>
                                     <div key={index} className='navbar-item py-4'>
-                                        <item.icon className={`navbar-item-icon`}></item.icon>
+                                        <item.icon className="navbar-item-icon" />
                                         <span className='navbar-item-label'>{item.text}</span>
                                     </div>
                                 </NavLink>
@@ -43,7 +43,7 @@ const Sidebar = (props) => {
                         } else {
                             return (
                                 <div key={index} onClick={() => onSearch()} key={index} className='navbar-item py-4'>
-                                    <item.icon className={`navbar-item-icon`}></item.icon>
+                                    <item.icon className="navbar-item-icon" />
                                     <span className='navbar-item-label'>{item.text}</span>
                                 </div>
                             )
@@ -51,6 +51,14 @@ const Sidebar = (props) => {
                     })
                 }
                 
+            </div>
+            <div className="navbar-items-bottom">
+                <NavLink key={navItems.length + 1} to="/settings" exact activeClassName='navbar-active'>
+                    <div key={navItems.length + 1} className='navbar-item py-4'>
+                        <icons.Settings className="navbar-item-icon" />
+                        <span className='navbar-item-label'>Settings</span>
+                    </div>
+                </NavLink>
             </div>
         </div>
     )

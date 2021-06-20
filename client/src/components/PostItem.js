@@ -19,57 +19,23 @@ class PostItem extends React.Component {
     render() {
         return (
             <div className="main-container">
-                <Col md={8} className="my-4 p-0">
-                    <Card className="card-dark cursor-pointer mb-4">
-                        <Card.Body className="p-4">
-                            <div className="post mb-2">
-                                <p className="h2">{this.state.post.title}</p>
-                                <p className="h6 text-secondary text-hover-green">
-                                    u/{this.state.post.author.username}
-                                </p>
-                                <p className="h5 text-secondary">
-                                    {this.state.post.body}
-                                </p>
-                                <span className="text-green">
-                                    <ExpandLess></ExpandLess> 14
-                                </span>
-                                <span className="text-secondary">
-                                    <ExpandMore className="text-secondary"></ExpandMore>{" "}
-                                    0
-                                </span>
-                            </div>
-
-                            {/* <div className='comments mt-4'>
-                                <div className='comment-item'>
-                                    <p className='h5'>I think its true</p>
-                                    <p className='h6 text-secondary text-hover-green'>u/iamashwincherian</p>
-                                    <p className='h5 text-secondary'>asdas</p>
-                                    <span className='text-green'><ExpandLess></ExpandLess> 14</span><span className='text-secondary'><ExpandMore className='text-secondary'></ExpandMore> 0</span>
-                                </div>
-                            </div> */}
-                        </Card.Body>
-                    </Card>
-
-                    {/* Comments */}
-
-                    <div className="mt-4">
-                        <hr></hr>
-                        <Card className="card-dark cursor-pointer">
-                            <Card.Body className="p-4">
-                                <p className="h4">Great Work!</p>
-                                <p className="h6 text-secondary text-hover-green">
-                                    u/anonymous
-                                </p>
-                                <p className="h5 text-secondary"></p>
-                                <span className="text-green">
-                                    <ExpandLess></ExpandLess> 14
-                                </span>
-                                <span className="text-secondary">
-                                    <ExpandMore className="text-secondary"></ExpandMore>{" "}
-                                    0
-                                </span>
-                            </Card.Body>
-                        </Card>
+                <Col md={8} className="my-4 p-0 mx-auto">
+                    <div className="post" style={{marginLeft: '-100px'}}>
+                        <p className="h2">{this.state.post.title}</p>
+                        <p className="h6 text-secondary text-hover-green">
+                            u/{this.state.post.author.username}
+                        </p>
+                        <br></br>
+                        <p className="text-secondary">
+                            {this.state.post.body}
+                        </p>
+                        <span className="text-green">
+                            <ExpandLess></ExpandLess> 14
+                        </span>
+                        <span className="text-secondary">
+                            <ExpandMore className="text-secondary"></ExpandMore>{" "}
+                            0
+                        </span>
                     </div>
                 </Col>
             </div>

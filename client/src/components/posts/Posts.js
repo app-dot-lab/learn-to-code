@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 import Backend from "../../api/backend";
 
-import './styles.css'
+import './styles.scss'
+import RetroCard from "../cards/RetroCard";
 
 const Home = () => {
     const auth = useSelector(state => state.auth)
@@ -37,9 +38,7 @@ const Home = () => {
     return (
         <div className="main-container">
             <Row>
-                <Col>
-                    <h1>Posts</h1>
-                </Col>
+                <Col><h1>Posts</h1></Col>
                 { auth.isLoggedIn && 
                     <Col className="text-right my-auto">
                         <Link
@@ -60,7 +59,7 @@ const Home = () => {
                 <Form.Group id="post-search" className="mb-0"> 
                     <Search className="search-icon"></Search>
                     <Form.Control
-                        className="input-dark shadow-none pl-5 mb-1"
+                        className="input-transparent pl-5 mb-1"
                         type="text"
                         placeholder="Search for a post"
                         value={searchTerm}
@@ -82,26 +81,22 @@ const Home = () => {
                                     },
                                 }}
                             >
-                                <Card className="card-retro cursor-pointer">
-                                    <Card.Body>
-                                        <div className="card-retro-content">
-                                            <p className="text-secondary">
-                                                u/{post.author?.username}
-                                            </p>
-                                            <Card.Title className="h4">
-                                                {post.title}
-                                            </Card.Title>
-                                            <p className="text-secondary">{post.body.slice(0,150)} ... <small className="text-secondary text-hover-primary">(Read More)</small></p>
-                                            <span className="text-color-primary">
-                                                <ExpandLess></ExpandLess> 14
-                                            </span>
-                                            <span className="text-secondary">
-                                                <ExpandMore className="text-secondary"></ExpandMore>{" "}
-                                                0
-                                            </span>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
+                                <RetroCard>
+                                    <p className="text-secondary">
+                                        u/{post.author?.username}
+                                    </p>
+                                    <Card.Title className="h4">
+                                        {post.title}
+                                    </Card.Title>
+                                    <p className="text-secondary">{post.body.slice(0,150)} ... <small className="text-secondary text-hover-primary">(Read More)</small></p>
+                                    <span className="text-color-primary">
+                                        <ExpandLess></ExpandLess> 14
+                                    </span>
+                                    <span className="text-secondary">
+                                        <ExpandMore className="text-secondary"></ExpandMore>{" "}
+                                        0
+                                    </span>
+                                </RetroCard>
                             </Link>
                         </Col>
                     );
