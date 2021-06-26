@@ -25,7 +25,6 @@ ServiceLocator.prototype.register=function(){
 
 ServiceLocator.prototype.get=function(dependencyName) {
     try {
-        logger.info('Resolving dependency : ' + dependencyName)
         return this.container.resolve(dependencyName);
     } catch (error) {
         logger.error(`Could not find matching dependency :${error}`)
