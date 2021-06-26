@@ -2,8 +2,9 @@ const {createLogger,format, transports, level} = require("winston");
 const httpContext = require('express-http-context');
 const {json,combine,label,timestamp}=format;
 const getReqId=format(info=>{
-    if(httpContext.get('reqId'))
-        info['req_id']=httpContext.get('reqId');
+    const reqId= httpContext.get('reqId');
+    if(reqId)
+        info['req_id']=reqId;
     return info;
 })
 const getTransport=function (config){
