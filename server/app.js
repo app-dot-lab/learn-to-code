@@ -17,6 +17,9 @@ const apiRouter=express.Router();
 app.use('/api',apiRouter);
 apiRoutes(apiRouter,serviceLocator);
 
+app.get('/',(req,res,next)=>    {
+    res.send('Nothing to see here. Move on');
+})
 const startServer= async ()=> {
     process.on('uncaughtException',()=>{
         logger.error('Uncaught exception was thrown in App.js')
