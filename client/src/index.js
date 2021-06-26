@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 
 import App from './components/App'
 import reducers from './reducers'
 import { AuthReducerMiddleware } from './middlewares/reducers/auth'
+
 import { ThemeReducerMiddleware } from './middlewares/reducers/themes'
-import { getDefaultReduxState } from './utils/auth'
 
 import 'normalize.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +24,8 @@ const persistor = persistStore(store)
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>, 
 document.getElementById('root'))
