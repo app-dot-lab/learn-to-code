@@ -1,15 +1,17 @@
-var express = require('express');
-var serviceLocator= require('./libs/service_locator');
-var configs = serviceLocator.get('configs')
+const express = require('express');
+const serviceLocator= require('./libs/service_locator');
 
-var app = express();
+const configs = serviceLocator.get('configs')
+const logger= serviceLocator.container.cradle.logger
+const app = express();
+
 
 const startServer= async ()=> {
     process.on('uncaughtException',()=>{
-        console.log('uncaughtException')
+        logger.error('Uncaught exception was thrown in App.js')
     })
     app.listen(configs.app.port,()=>{
-        console.log('Listening on '+configs.app.port)
+        logger.info(`Listening on ${configs.app.port}`)
     })
 }
 startServer();
