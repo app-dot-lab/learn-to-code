@@ -1,39 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Row, Col, Form } from "react-bootstrap";
 import { ExpandLess, ExpandMore, Add, Search } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import Backend from "../../api/backend";
-
 import './styles.scss'
 import RetroCard from "../cards/RetroCard";
+import usePosts from "./usePosts";
 
 const Home = () => {
     const auth = useSelector(state => state.auth)
-    const [posts, setPosts] = useState([])
-    const [searchResults, setSearchResults] = useState([])
-    const [searchTerm, setSearchTerm] = useState('')
-
-    useEffect(() => {
-        Backend.get("/posts").then((res) => {
-            setPosts(res.data);
-            setSearchResults(res.data)
-        });
-    }, [])
-
-    const onSearch = value => {
-        setSearchTerm(value)
-        if(value == '') {
-            return setSearchResults(posts)
-        }
-        setSearchResults(posts.filter(post => {
-            if(post.title.toLowerCase().includes(value.toLowerCase()) 
-            || post.body.toLowerCase().includes(value.toLowerCase())) {
-                return post
-            }
-        }))
-    }
+    const { onSearch, searchTerm, searchResults } = usePosts()
 
     return (
         <div className="main-container">
