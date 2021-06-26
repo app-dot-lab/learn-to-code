@@ -7,7 +7,7 @@ import { DarkMode, LightMode } from "../actions/ThemeActions";
 import Sidebar from "./Sidebar";
 import { ProtectedRoute } from "../protectedRoutes";
 import Courses from "./courses/Courses";
-import Home from "./Home";
+import Home from "../routes/Home";
 import Posts from "./posts/Posts";
 import Login from "./Login";
 import Logout from "./Logout";
