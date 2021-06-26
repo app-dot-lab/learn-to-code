@@ -1,7 +1,7 @@
 const {Lifetime,asValue,asClass} = require('awilix');
 const awilix = require('awilix');
-
 const config =require('../configs/config');
+const logger = require('./logger').createLogger(config.application_logging)
 
 function ServiceLocator(){
     this.container= awilix.createContainer();
@@ -16,7 +16,7 @@ ServiceLocator.prototype.register=function(){
             register: asClass 
         }
     ).register({
-        logger:asValue(require('../libs/logger'))
+        logger:asValue(logger)
     })
     .register({
         configs: asValue(require('../configs/config'))
@@ -25,8 +25,10 @@ ServiceLocator.prototype.register=function(){
 
 ServiceLocator.prototype.get=function(dependencyName) {
     try {
-       return this.container.resolve(dependencyName);
+        logger.info('Resolving dependency : ' + dependencyName)
+        return this.container.resolve(dependencyName);
     } catch (error) {
+        logger.error(`Could not find matching dependency :${error}`)
         throw(error)
     }
 }
