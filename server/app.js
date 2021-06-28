@@ -3,6 +3,7 @@ const serviceLocator= require('./libs/service_locator');
 
 const configs = serviceLocator.get('configs')
 const logger= serviceLocator.container.cradle.logger
+const routerUtils= serviceLocator.container.cradle.routerUtils
 const app = express();
 var authRoutes= require('./routes/authRoutes/index')
 var apiRoutes= require('./routes/apiRoutes/index')
@@ -15,6 +16,8 @@ authRoutes(authRouter,serviceLocator);
 //Create api router and assign its routing to the api file.
 const apiRouter=express.Router();
 app.use('/api',apiRouter);
+routerUtils.initJwt(apiRouter,serviceLocator)
+routerUtils.errorJwt(apiRouter,serviceLocator)
 apiRoutes(apiRouter,serviceLocator);
 
 app.get('/',(req,res,next)=>    {

@@ -4,6 +4,7 @@ dotenv.config()
 module.exports = {
     app:{
         port: process.env.PORT_NO,
+        jwt_secret: process.env.JWT_SECRET
     },
     application_logging:{
         info_file: 'logs/info.log',

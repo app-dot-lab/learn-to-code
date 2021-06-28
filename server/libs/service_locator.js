@@ -21,6 +21,9 @@ ServiceLocator.prototype.register=function(){
     .register({
         configs: asValue(require('../configs/config'))
     })
+    .register({
+        routerUtils: asValue(require('../utils/router_utils'))
+    })
 }
 
 ServiceLocator.prototype.get=function(dependencyName) {
