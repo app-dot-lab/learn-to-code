@@ -7,7 +7,7 @@ const Sidebar = (props) => {
     const auth = useSelector(state => state.auth)
 
     const navItems = [
-        { icon: icons.Apps, text: 'Home', link: '/'},
+        { icon: icons.Subject, text: 'Posts', link: '/posts'},
         { icon: icons.Search, text: 'Search', link: '/search'},
         { icon: icons.MenuBook, text: 'Courses', link: '/courses'},
         { icon: icons.Code, text: 'IDE', link: '/ide'},
@@ -22,20 +22,20 @@ const Sidebar = (props) => {
     return (
         <div className='sidebar text-center py-3 px-2'>
             <div className='logo py-3'>
-                <h1 className='text-center text-green font-weight-medium'>{"{ }"}</h1>
+                <h1 className='text-center text-color-primary font-weight-medium'>{"{ }"}</h1>
             </div>
 
             <br></br>
 
             <div className='navbar-items'>
-                { 
+                {
                     navItems.map((item, index) => {
 
                         if (item.text != 'Search') {
                             return (
                                 <NavLink key={index} to={{ pathname: item.link, state: {from: props.location}}} exact activeClassName='navbar-active'>
                                     <div key={index} className='navbar-item py-4'>
-                                        <item.icon className={`navbar-item-icon`}></item.icon>
+                                        <item.icon className="navbar-item-icon" />
                                         <span className='navbar-item-label'>{item.text}</span>
                                     </div>
                                 </NavLink>
@@ -43,7 +43,7 @@ const Sidebar = (props) => {
                         } else {
                             return (
                                 <div key={index} onClick={() => onSearch()} key={index} className='navbar-item py-4'>
-                                    <item.icon className={`navbar-item-icon`}></item.icon>
+                                    <item.icon className="navbar-item-icon" />
                                     <span className='navbar-item-label'>{item.text}</span>
                                 </div>
                             )
@@ -51,6 +51,14 @@ const Sidebar = (props) => {
                     })
                 }
                 
+            </div>
+            <div className="navbar-items-bottom">
+                <NavLink key={navItems.length + 1} to="/settings" exact activeClassName='navbar-active'>
+                    <div key={navItems.length + 1} className='navbar-item py-4'>
+                        <icons.Settings className="navbar-item-icon" />
+                        <span className='navbar-item-label'>Settings</span>
+                    </div>
+                </NavLink>
             </div>
         </div>
     )
