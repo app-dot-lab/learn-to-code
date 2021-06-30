@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col, Card} from 'react-bootstrap'
 
-import RetroCard from '../cards/RetroCard'
+import RetroCard from '../../components/cards/RetroCard'
 
 class Courses extends React.Component {
 

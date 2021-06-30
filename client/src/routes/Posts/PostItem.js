@@ -15,14 +15,12 @@ import './styles.scss'
 
 const PostItem = props => {
     const theme = useSelector(state => state.theme)
-    console.log(theme)
     const [post, setPost] = useState({})
     const postId = props.match.params.id
 
     useEffect(() => {
         Backend.get(`/posts/${postId}`)
             .then((res) => {
-                console.log(res.data)
                 setPost(res.data)
             })
             .catch((err) => console.log(err));
