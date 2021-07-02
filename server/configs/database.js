@@ -18,7 +18,7 @@ class Database{
         const db = mongoose.connection;
         db.on("error", ()=> logger.error('Database connection error'));
         db.on("open",()=>{
-            console.log('DB connection successful');
+            logger.info('DB connection successful');
         })
     }
 }
