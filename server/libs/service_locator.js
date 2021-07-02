@@ -24,6 +24,9 @@ ServiceLocator.prototype.register=function(){
     .register({
         routerUtils: asValue(require('../utils/router_utils'))
     })
+    .register({
+        mongoose: asValue(require('mongoose'))
+    })
 }
 
 ServiceLocator.prototype.get=function(dependencyName) {

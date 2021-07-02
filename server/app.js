@@ -4,8 +4,9 @@ const passport=require('passport')
 const configs = serviceLocator.get('configs')
 const logger= serviceLocator.container.cradle.logger
 const routerUtils= serviceLocator.container.cradle.routerUtils
+const Database = require('./configs/database')
 const app = express();
-
+Database.connect();
 app.use(passport.initialize());
 app.use(passport.session());
 
