@@ -27,6 +27,15 @@ ServiceLocator.prototype.register=function(){
     .register({
         mongoose: asValue(require('mongoose'))
     })
+    .register({
+        passport: asValue(require('passport'))
+    })
+    .register({
+        path: asValue(require('path')),
+    })
+    .register({
+        
+    })
 }
 
 ServiceLocator.prototype.get=function(dependencyName) {

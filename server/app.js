@@ -1,36 +1,18 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const serviceLocator= require('./libs/service_locator');
-const passport=require('passport')
-const configs = serviceLocator.get('configs')
-const logger= serviceLocator.container.cradle.logger
-const routerUtils= serviceLocator.container.cradle.routerUtils
-const Database = require('./configs/database')
+const passport= serviceLocator.get('passport');
+const configs = serviceLocator.get('configs');
+const path = serviceLocator.get('path');
+const logger= serviceLocator.get('logger');
+const routerUtils= serviceLocator.get('routerUtils');
+const Database = require('./configs/database');
 const app = express();
-Database.connect();
-app.use(passport.initialize());
-app.use(passport.session());
-
-var authRoutes= require('./routes/authRoutes/index')
-var apiRoutes= require('./routes/apiRoutes/index');
 const { initPassport } = require('./utils/passport_utils');
-
-//Create auth router and assign its routing to the authRoutes file.
 const authRouter=express.Router();
-app.use('/auth',authRouter);
-initPassport(app,authRouter,serviceLocator);
-authRoutes(authRouter,serviceLocator);
-
-//Create api router and assign its routing to the api file.
 const apiRouter=express.Router();
-app.use('/api',apiRouter);
-routerUtils.initJwt(apiRouter,serviceLocator)
-routerUtils.errorJwt(apiRouter,serviceLocator)
-apiRoutes(apiRouter,serviceLocator);
-
-
-app.get('/',(req,res,next)=>    {
-    res.send('Nothing to see here. Move on');
-})
+const User = require('./models/User');
 const startServer= async ()=> {
     process.on('uncaughtException',()=>{
         logger.error('Uncaught exception was thrown in App.js')
@@ -39,4 +21,40 @@ const startServer= async ()=> {
         logger.info(`Listening on ${configs.app.port}`)
     })
 }
+
+Database.connect();
+
+//Set the view engine
+app.set('views',path.join(__dirname, 'views'));
+
+//Registering middlewares here.
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname,'public')));
+app.use(
+    cors({
+        origin:'https://localhost:3000',// The port from which react will try to access this project
+        credentials: true,
+    })
+)
+app.use('/auth',authRouter);
+app.use('/api',apiRouter);
+
+app.disable('x-powered-by');
+var authRoutes= require('./routes/authRoutes/index')
+var apiRoutes= require('./routes/apiRoutes/index');
+
+//Create auth router and assign its routing to the authRoutes file.
+initPassport(app,authRouter,serviceLocator);
+authRoutes(authRouter,serviceLocator);
+
+//Create api router and assign its routing to the api file.
+routerUtils.initJwt(apiRouter,serviceLocator)
+routerUtils.errorJwt(apiRouter,serviceLocator)
+apiRoutes(apiRouter,serviceLocator);
+
+
+app.get('/',(req,res,next)=>    {
+    res.send('Nothing to see here. Move on');
+})
 startServer();
