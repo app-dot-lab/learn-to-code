@@ -1,7 +1,7 @@
 const jwt = require('express-jwt')
 const {isCelebrateError} = require('celebrate')
 const httpStatus = require('http-status');
-
+const unauthorizedRoutes = [/\/login/,/\/posts/];
 module.exports.initJwt=(router,serviceLocator)=>{
     const configs = serviceLocator.get('configs')
     const logger = serviceLocator.get('logger')
@@ -16,7 +16,7 @@ module.exports.initJwt=(router,serviceLocator)=>{
                 return null;
                 },
         }).unless({
-            path: [/\/login/],
+            path: unauthorizedRoutes,
         })
     )
 }
