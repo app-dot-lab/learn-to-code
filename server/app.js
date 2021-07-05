@@ -37,6 +37,8 @@ app.use(
         credentials: true,
     })
 )
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/auth',authRouter);
 app.use('/api',apiRouter);
 
@@ -45,6 +47,7 @@ var authRoutes= require('./routes/authRoutes/index')
 var apiRoutes= require('./routes/apiRoutes/index');
 
 //Create auth router and assign its routing to the authRoutes file.
+
 initPassport(app,authRouter,serviceLocator);
 authRoutes(authRouter,serviceLocator);
 

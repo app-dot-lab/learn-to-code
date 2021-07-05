@@ -4,9 +4,7 @@ const passportGoogle=require('passport-google-auth').Strategy;
 const User = require('../models/User'); 
 module.exports.initPassport=(app,router,serviceLocator)=>{
     const logger = serviceLocator.get('logger')
-    
-    app.use(passport.initialize());
-    app.use(passport.session());
+
     passport.use(new LocalStrategy(User.authenticate()));
     passport.serializeUser(User.serializeUser())
     passport.deserializeUser(User.deserializeUser());
