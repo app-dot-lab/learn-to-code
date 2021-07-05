@@ -10,7 +10,6 @@ const routerUtils= serviceLocator.get('routerUtils');
 const Database = require('./configs/database');
 const app = express();
 const { initPassport } = require('./utils/passport_utils');
-const authRouter=express.Router();
 const apiRouter=express.Router();
 const User = require('./models/User');
 const startServer= async ()=> {
@@ -39,18 +38,12 @@ app.use(
 )
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/auth',authRouter);
 app.use('/api',apiRouter);
 
 app.disable('x-powered-by');
-var authRoutes= require('./routes/authRoutes/index')
-var apiRoutes= require('./routes/apiRoutes/index');
-
-//Create auth router and assign its routing to the authRoutes file.
-
-initPassport(app,authRouter,serviceLocator);
-authRoutes(authRouter,serviceLocator);
-
+var apiRoutes= require('./routes/index');
+//Set-up passport for using our auth API's
+initPassport(apiRouter,serviceLocator);
 //Create api router and assign its routing to the api file.
 routerUtils.initJwt(apiRouter,serviceLocator)
 routerUtils.errorJwt(apiRouter,serviceLocator)

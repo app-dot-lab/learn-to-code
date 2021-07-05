@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy =require('passport-local').Strategy;
 const passportGoogle=require('passport-google-auth').Strategy;
 const User = require('../models/User'); 
-module.exports.initPassport=(app,router,serviceLocator)=>{
+module.exports.initPassport=(router,serviceLocator)=>{
     const logger = serviceLocator.get('logger')
 
     passport.use(new LocalStrategy(User.authenticate()));

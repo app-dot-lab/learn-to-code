@@ -15,6 +15,8 @@ module.exports.initJwt=(router,serviceLocator)=>{
                     return req.headers.authorization.split(' ')[1]
                 return null;
                 },
+        }).unless({
+            path: [/\/login/],
         })
     )
 }
