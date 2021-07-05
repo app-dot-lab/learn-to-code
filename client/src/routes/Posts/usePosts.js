@@ -7,12 +7,18 @@ const usePosts = cb => {
     const [searchResults, setSearchResults] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
 
-    const fetchPosts = (cb) => {
-        Backend.get("/posts").then((res) => {
-            setPosts(res.data);
-            cb()
-            setSearchResults(res.data)
-        });
+    const fetchPosts = () => {
+        Backend.get("/posts")
+            .then((res) => {
+                setPosts(res.data);
+                setSearchResults(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+                setPosts([])
+                setSearchResults([])
+            });
+
     }
     
     useEffect(() => {

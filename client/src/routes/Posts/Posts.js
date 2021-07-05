@@ -10,7 +10,7 @@ import usePosts from "./usePosts";
 
 const Home = () => {
     const auth = useSelector(state => state.auth)
-
+    const { onSearch, searchTerm, searchResults, posts } = usePosts()
     return (
         <div className="main-container">
             <Row>
