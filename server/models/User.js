@@ -15,7 +15,18 @@ const userSchema = Schema({
     }
 });
 
-userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(passportLocalMongoose,{
+    findByUsername : function(model,queryParameters){
+        // Checks both username and email
+        console.log('as')
+        for( let param of queryParameters.$or ){
+            if( typeof param == "object" && param.hasOwnProperty("username") ){
+                queryParameters.$or.push( { email : param.username } );
+            }
+        }
+        return model.findOne(queryParameters);
+    }
+})
 
 
 module.exports = mongoose.model('User',userSchema);
