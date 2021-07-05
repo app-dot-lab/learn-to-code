@@ -37,7 +37,7 @@ ServiceLocator.prototype.register=function(){
         path: asValue(require('path')),
     })
     .register({
-       common_utils: asValue(require('../utils/common_utils')) 
+       commonUtils: asValue(require('../utils/common_utils')) 
     })
 }
 
