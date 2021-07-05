@@ -31,10 +31,13 @@ ServiceLocator.prototype.register=function(){
         passport: asValue(require('passport'))
     })
     .register({
+        passportMongoose: asValue(require('passport-local-mongoose'))
+    })
+    .register({
         path: asValue(require('path')),
     })
     .register({
-        
+       common_utils: asValue(require('../utils/common_utils')) 
     })
 }
 
