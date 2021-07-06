@@ -20,6 +20,17 @@ class Database{
         db.on("open",()=>{
             logger.info('DB connection successful');
         })
+         // initialize Model
+        const fs = serviceLocator.get('fs');
+        const path = serviceLocator.get('path');
+        const modelsPath = path.resolve('./models');
+        const files = fs.readdirSync(modelsPath);
+        let filename = '';
+
+        for (const file of files) {
+            filename = file.split('.')[0];
+            require(`${modelsPath}/${filename}`);
+        }
     }
 }
 module.exports = new Database();
