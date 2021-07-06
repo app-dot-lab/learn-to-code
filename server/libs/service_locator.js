@@ -1,3 +1,4 @@
+'use strict'
 const {Lifetime,asValue,asClass} = require('awilix');
 const awilix = require('awilix');
 const config =require('../configs/config');
@@ -12,8 +13,6 @@ ServiceLocator.prototype.register=function(){
         ['./controllers/*.js','./services/*.js'],
         {
             formatName: 'camelCase',
-            lifetime: Lifetime.SINGLETON,
-            register: asClass 
         }
     ).register({
         logger:asValue(logger)
@@ -35,6 +34,9 @@ ServiceLocator.prototype.register=function(){
     })
     .register({
         path: asValue(require('path')),
+    })
+    .register({
+        fs:asValue(require('fs')),
     })
     .register({
        commonUtils: asValue(require('../utils/common_utils')) 
