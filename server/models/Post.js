@@ -1,3 +1,4 @@
+'use strict';
 const serviceLocator = require('../libs/service_locator')
 const mongoose = serviceLocator.get('mongoose');
 const Schema = mongoose.Schema;
