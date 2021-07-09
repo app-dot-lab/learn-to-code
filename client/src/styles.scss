@@ -13,12 +13,14 @@
 }
 
 body {
+    overflow-y: hidden;
     --bg-color: #dddddd;
     --color-primary: #57ce6a;
     --text-color: #202020;
     --card-bg: #e6e6e6;
     --sidebar-bg: #dddddd;
     --sidebar-item-color: #484848;
+    --hr-color: rgba(77, 77, 77, 0.111);
 }
 
 body.dark {
@@ -27,6 +29,11 @@ body.dark {
     --card-bg: #171c28;
     --sidebar-bg: #171c28;
     --sidebar-item-color: #54607d;
+    --hr-color: #fff;
+}
+
+hr {
+    background-color: var(--hr-color) !important;
 }
 
 .text-color-primary {
@@ -105,8 +112,10 @@ body {
 }
 
 .main-container {
+    overflow-y: scroll;
     margin-left: 70px;
     padding: 30px;
+    height: 100vh;
     min-height: 100vh;
     max-width: 100vw;
 }
