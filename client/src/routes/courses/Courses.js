@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col, Card} from 'react-bootstrap'
-
-import RetroCard from '../cards/RetroCard'
+import {Link} from 'react-router-dom'
+import RetroCard from '../../components/cards/RetroCard'
 
 class Courses extends React.Component {
 
@@ -74,17 +74,19 @@ class Courses extends React.Component {
                         this.courses.map((course, index) => {
                             return (
                                 <Col key={index} sm={12} md={6} lg={4} xl={3}>
-                                    <RetroCard img={course.img}>
-                                        <p className='h4'>{course.title}</p>
-                                        <p className='text-secondary'>{course.desc}</p>
-                                        <div className='tags mt-4'>
-                                            {
-                                                course.tags.map((tag, index2) => {
-                                                    return <span key={index2} className='tag' style={{border: `1px solid ${course.color}`, color: `${course.color}`}}>{tag}</span>
-                                                })
-                                            }
-                                        </div>
-                                    </RetroCard>
+                                    <Link to={`/courses/${course.title}`}>
+                                        <RetroCard img={course.img}>
+                                            <p className='h4'>{course.title}</p>
+                                            <p className='text-secondary'>{course.desc}</p>
+                                            <div className='tags mt-4'>
+                                                {
+                                                    course.tags.map((tag, index2) => {
+                                                        return <span key={index2} className='tag' style={{border: `1px solid ${course.color}`, color: `${course.color}`}}>{tag}</span>
+                                                    })
+                                                }
+                                            </div>
+                                        </RetroCard>
+                                    </Link>
                                 </Col>
                             )
                         })

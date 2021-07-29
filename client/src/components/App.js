@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { DARK_MODE, LIGHT_MODE } from "../actions/types";
-import { DarkMode, LightMode } from "../actions/ThemeActions";
 import Sidebar from "./Sidebar";
 import { ProtectedRoute } from "../protectedRoutes";
-import Courses from "./courses/Courses";
+import Courses from "../routes/courses/Courses";
+import CourseItem from "../routes/courses/CourseItem";
 import Home from "../routes/Home";
 import Posts from "./posts/Posts";
 import Login from "./Login";
@@ -15,8 +15,9 @@ import PostItem from "../routes/posts/PostItem";
 import NewPost from "../routes/posts/NewPost";
 import EditPost from "../routes/posts/EditPost";
 import Search from "./Search";
-import IDE from "./ide/IDE";
+import IDE from "../routes/ide/IDE";
 import Settings from "./settings/Settings";
+import Lesson from "../routes/courses/Lesson";
 
 const App = () => {
     const [searchActive, setSearchActive] = useState(false)
@@ -55,6 +56,8 @@ const App = () => {
                 <Route path="/" exact component={Home} />
                 <Route path="/posts" exact component={Posts} />
                 <Route path="/search" exact component={Search} />
+                <Route path="/courses/:name" exact component={CourseItem} />
+                <Route path="/courses/:courseName/lessons/:lessonName" exact component={Lesson} />
                 <ProtectedRoute
                     isAuthenticated={auth.isLoggedIn}
                     path="/courses"
