@@ -80,7 +80,7 @@ const Login = (props) => {
                                 </Form.Group>
                                 <Button
                                     type="submit"
-                                    className="w-100 border-none bg-green text-black mt-1 py-3 fw-5"
+                                    className="w-100 border-none btn-color-primary text-black mt-1 py-3 fw-5"
                                 >
                                     Login
                                 </Button>
