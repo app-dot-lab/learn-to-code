@@ -1,4 +1,4 @@
-import { Row, Col, Card } from 'react-bootstrap'
+import { Row, Col, Modal, Card, Button } from 'react-bootstrap'
 import { useState } from "react";
 import ReactMarkdown from 'react-markdown'
 import { useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import MainContainer from '../../components/containers/MainContainer'
 import IDE from '../../components/ide/IDE'
 import CodeBlock from '../../components/posts/CodeBlock';
+import getCourse from './SampleCourse';
 
 import "ace-builds/src-noconflict/ext-language_tools"
 import "ace-builds/src-noconflict/mode-javascript";
@@ -13,75 +14,57 @@ import 'ace-builds/src-noconflict/theme-kuroir'; // Light Theme
 import "../posts/styles.scss";
 
 const Lesson = props => {
-    const defaultSnippet = `function main() {
-    const value = "Hello! World";
-    console.log(value);
-}
-    
-main()`
+    const course = getCourse(0)
+    const [code, setCode] = useState(course.defaultSnippet)
+    const [output, setOutput] = useState('')
+    const [error, setError] = useState('')
+    const [show, setShow] = useState(false)
 
-const content = `
-A UI element that is not currently supported out of the box with Flutter is a click wheel, or knob, or radial control, rotatable circle, or whatever you want to call it. The following snippet demonstrates how to take a circular container, then detect which direction the user is rotating (clockwise or counter clockwise) and its velocity. 
-Full [wheel demo source code](https://github.com/fireship-io/216-flutter-ipod/blob/master/lib/wheel.dart). 
+    const handleClose = () => setShow(false)
+    const handleOpen = () => setShow(true)
 
-#### 👉 Detect Pan Gestures
+    const onCompile = res => {
+        if(res != course.expectedOutput) {
+            setOutput('')
+            setError(res)
+            return
+        }
 
-Use a [GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) to wrap a container with a BoxShape.circle. Every pan event on the circle will emit data with information about the user's movement. 
-
-#### 💫 Calculate Rotational Movement
-
-Think of a wheel as four separate quadrants like topRight, bottomRight, bottomLeft, and topLeft. For each quadrant, then are four different directions the user can move: up, down, left, or right. We can calculate the change in the user's movement by looking at the *delta*, then adjust it based on the quadrant in which it occurred. 
-
-#### 🏄 Add Velocity
-
-Adding velocity will make this UI element feel more natural if it controls a scrollable view. The faster the user pans, the higher the velocity. Simply multiply the rotational change by the delta distance. 
-
----
-##### Constraints
-\`\`\`javascript
-    console.log('hi');
-    var i = 0;
-\`\`\`
----
-A UI element that is not currently supported out of the box with Flutter is a click wheel, or knob, or radial control, rotatable circle, or whatever you want to call it. The following snippet demonstrates how to take a circular container, then detect which direction the user is rotating (clockwise or counter clockwise) and its velocity. 
-Full [wheel demo source code](https://github.com/fireship-io/216-flutter-ipod/blob/master/lib/wheel.dart). 
-
-#### 👉 Detect Pan Gestures
-
-Use a [GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) to wrap a container with a BoxShape.circle. Every pan event on the circle will emit data with information about the user's movement. 
-
-#### 💫 Calculate Rotational Movement
-
-Think of a wheel as four separate quadrants like topRight, bottomRight, bottomLeft, and topLeft. For each quadrant, then are four different directions the user can move: up, down, left, or right. We can calculate the change in the user's movement by looking at the *delta*, then adjust it based on the quadrant in which it occurred. 
-
-#### 🏄 Add Velocity
-
-Adding velocity will make this UI element feel more natural if it controls a scrollable view. The faster the user pans, the higher the velocity. Simply multiply the rotational change by the delta distance. 
-
----
-##### Constraints
-\`\`\`javascript
-    console.log('hi');
-    var i = 0;
-\`\`\`
----
-`
-    
-    const [code, setCode] = useState(defaultSnippet)
+        setOutput(res)
+        setError('')
+        handleOpen()
+    }
 
     return (
         <MainContainer style={{overflowY: 'hidden'}}>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Lesson Completed!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>You have successfully completed the lesson</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={handleClose}>
+                        Next
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <Row>
-                <Col xs={6} style={{overflowY: 'scroll', height: '100vh'}}>
-                    <h3>Lesson 1</h3>
-                    <ReactMarkdown components={CodeBlock()}>{content}</ReactMarkdown>
+                <Col xs={6} style={{overflowY: 'auto', height: '100vh'}}>
+                    <ReactMarkdown components={CodeBlock()}>{course.content}</ReactMarkdown>
                 </Col>
                 <Col xs={6} style={{height: '100vh'}}>
-                    <IDE code={code} setCode={setCode} />
-                    <div className="mt-3" style={{height: '30vh'}}>
+                    <IDE code={code} setCode={setCode} onCompile={onCompile} />
+                    <div className="mt-3" style={{height: '40vh'}}>
                         <Card className="h-75">
                             <Card.Body>
                                 Output
+                                <p className="mt-2"><code className="text-success">{output}</code></p>
+                                <p className="mt-2"><code className="text-secondary">{error.toString().split('\n').map(line => <p className="pb-0 mb-0 text-danger">{line}</p>)}</code></p>
                             </Card.Body>
                         </Card>
                     </div>
