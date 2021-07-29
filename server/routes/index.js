@@ -8,7 +8,7 @@ const Post = require("../models/post");
 // routes
 
 router.get("/posts", async (req, res) => {
-    var posts = await Post.find().populate("author");
+    var posts = await Post.find({published: true}).populate("author");
     res.send(posts);
 });
 
