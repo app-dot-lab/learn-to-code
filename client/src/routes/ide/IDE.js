@@ -13,12 +13,8 @@ import 'ace-builds/src-noconflict/theme-merbivore_soft';
 import 'ace-builds/src-noconflict/theme-gob';
 import 'ace-builds/src-noconflict/theme-kuroir'; // Light Theme
 
-const defaultSnippet = `function main() {
-    const value = "Hello! World";
-    console.log(value);
-}
-
-main()`
+const defaultSnippet = `const value = "Hello! World";
+console.log(value);`
 
 const IDE = () => {
     const [code, setCode] = useState(defaultSnippet)
