@@ -58,14 +58,9 @@ const App = () => {
                 <Route path="/search" exact component={Search} />
                 <Route path="/courses/:name" exact component={CourseItem} />
                 <Route path="/courses/:courseName/lessons/:lessonName" exact component={Lesson} />
-                <ProtectedRoute
-                    isAuthenticated={auth.isLoggedIn}
-                    path="/courses"
-                    exact
-                    component={Courses}
-                />
-                <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/posts/new" exact component={NewPost} />
-                <ProtectedRoute isAuthenticated={auth.isLoggedIn} path="/ide" exact component={IDE} />
+                <Route path="/courses" exact component={Courses} />
+                <Route path="/posts/new" exact component={NewPost} />
+                <Route path="/ide" exact component={IDE} />
                 <Route path="/posts/:id" exact component={PostItem} />
                 <Route path="/posts/:id/edit" exact component={EditPost} />
                 <Route path="/login" exact component={Login}/>
